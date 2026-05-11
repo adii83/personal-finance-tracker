@@ -33,14 +33,7 @@ public abstract class Transaction {
 
     public abstract double getSignedAmount();
 
-    public void displayInfo() {
-        System.out.println("--------------------------------");
-        System.out.println("Tanggal  : " + date);
-        System.out.println("Tipe     : " + getType());
-        System.out.println("Kategori : " + category);
-        System.out.println("Jumlah   : Rp" + amount);
-        System.out.println("Catatan  : " + note);
-    }
+
 
     /*
      * TODO SOLID - SRP:
