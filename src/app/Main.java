@@ -1,125 +1,59 @@
 package app;
 
-import java.util.Scanner;
-
-import manager.FinanceManager;
-import model.Expense;
-import model.Income;
-
 public class Main {
+
+    /*
+     * ==============================
+     * SOLID PRINCIPLE IMPLEMENTATION
+     * ==============================
+     *
+     * SRP (Single Responsibility Principle)
+     * -------------------------------------
+     * Main hanya bertugas menjalankan aplikasi.
+     *
+     * Sebelumnya Main menangani:
+     * - Menu
+     * - Input user
+     * - Switch case
+     * - Membuat object transaksi
+     * - Logika aplikasi
+     *
+     * Setelah SRP:
+     * - FinanceApp     -> mengatur alur aplikasi
+     * - MenuView       -> menampilkan menu
+     * - InputHelper    -> menangani input
+     * - TransactionFactory -> membuat object transaksi
+     *
+     *
+     * DIP (Dependency Inversion Principle)
+     * ------------------------------------
+     * Main tidak bergantung langsung pada:
+     * - Scanner
+     * - FinanceManager
+     * - Income
+     * - Expense
+     *
+     * Main hanya bergantung pada abstraction
+     * berupa FinanceApp.
+     */
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        FinanceManager financeManager = new FinanceManager();
 
-        boolean running = true;
+        FinanceManager manager = new FinanceManager();
 
-        while (running) {
-            System.out.println("\n=== PERSONAL FINANCE TRACKER ===");
-            System.out.println("1. Tambah Pemasukan");
-            System.out.println("2. Tambah Pengeluaran");
-            System.out.println("3. Lihat Semua Transaksi");
-            System.out.println("4. Lihat Saldo");
-            System.out.println("5. Lihat Laporan");
-            System.out.println("6. Keluar");
-            System.out.print("Pilih menu: ");
+        MenuView menuView = new MenuView();
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+        InputHelper inputHelper = new InputHelper();
 
-            switch (choice) {
-                case 1:
-                    System.out.println("\n=== TAMBAH PEMASUKAN ===");
+        TransactionFactory factory = new TransactionFactory();
 
-                    System.out.print("Tanggal: ");
-                    String incomeDate = scanner.nextLine();
+        FinanceApp app = new FinanceApp(
+                manager,
+                menuView,
+                inputHelper,
+                factory
+        );
 
-                    System.out.print("Kategori: ");
-                    String incomeCategory = scanner.nextLine();
-
-                    System.out.print("Jumlah: ");
-                    double incomeAmount = scanner.nextDouble();
-                    scanner.nextLine();
-
-                    System.out.print("Catatan: ");
-                    String incomeNote = scanner.nextLine();
-
-                    Income income = new Income(
-                            incomeDate,
-                            incomeCategory,
-                            incomeAmount,
-                            incomeNote
-                    );
-
-                    financeManager.addTransaction(income);
-                    break;
-
-                case 2:
-                    System.out.println("\n=== TAMBAH PENGELUARAN ===");
-
-                    System.out.print("Tanggal: ");
-                    String expenseDate = scanner.nextLine();
-
-                    System.out.print("Kategori: ");
-                    String expenseCategory = scanner.nextLine();
-
-                    System.out.print("Jumlah: ");
-                    double expenseAmount = scanner.nextDouble();
-                    scanner.nextLine();
-
-                    System.out.print("Catatan: ");
-                    String expenseNote = scanner.nextLine();
-
-                    Expense expense = new Expense(
-                            expenseDate,
-                            expenseCategory,
-                            expenseAmount,
-                            expenseNote
-                    );
-
-                    financeManager.addTransaction(expense);
-                    break;
-
-                case 3:
-                    financeManager.showAllTransactions();
-                    break;
-
-                case 4:
-                    System.out.println("Saldo saat ini: Rp" + financeManager.calculateBalance());
-                    break;
-
-                case 5:
-                    financeManager.showReport();
-                    break;
-
-                case 6:
-                    running = false;
-                    System.out.println("Program selesai.");
-                    break;
-
-                default:
-                    System.out.println("Menu tidak valid.");
-                    break;
-            }
-        }
-
-        scanner.close();
-
-        /*
-         * TODO SOLID - SRP:
-         * Main terlalu banyak menangani hal:
-         * 1. Menampilkan menu
-         * 2. Membaca input
-         * 3. Membuat object Income dan Expense
-         * 4. Mengatur switch case
-         * 5. Menghubungkan user dengan FinanceManager
-         *
-         * Setelah SOLID, alur program akan dipindahkan ke FinanceApp,
-         * tampilan menu ke MenuView, dan input ke InputHelper.
-         *
-         * TODO SOLID - DIP:
-         * Main langsung bergantung pada class konkret FinanceManager,
-         * Income, Expense, dan Scanner.
-         * Setelah SOLID, Main cukup menjalankan FinanceApp.
-         */
+        app.run();
     }
 }
