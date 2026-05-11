@@ -1,20 +1,26 @@
 package app;
 
 import manager.FinanceManager;
-import model.Expense;
-import model.Income;
+import model.Transaction;
 
 public class FinanceApp {
 
     private FinanceManager financeManager;
     private MenuView menuView;
     private InputHelper inputHelper;
+    private TransactionFactory factory;
 
-    public FinanceApp() {
+    public FinanceApp(
+            FinanceManager financeManager,
+            MenuView menuView,
+            InputHelper inputHelper,
+            TransactionFactory factory
+    ) {
 
-        financeManager = new FinanceManager();
-        menuView = new MenuView();
-        inputHelper = new InputHelper();
+        this.financeManager = financeManager;
+        this.menuView = menuView;
+        this.inputHelper = inputHelper;
+        this.factory = factory;
     }
 
     public void run() {
@@ -67,16 +73,11 @@ public class FinanceApp {
 
         menuView.showIncomeForm();
 
-        String date = inputHelper.input("Tanggal: ");
-        String category = inputHelper.input("Kategori: ");
-        double amount = inputHelper.inputDouble("Jumlah: ");
-        String note = inputHelper.input("Catatan: ");
-
-        Income income = new Income(
-                date,
-                category,
-                amount,
-                note
+        Transaction income = factory.createIncome(
+                inputHelper.input("Tanggal: "),
+                inputHelper.input("Kategori: "),
+                inputHelper.inputDouble("Jumlah: "),
+                inputHelper.input("Catatan: ")
         );
 
         financeManager.addTransaction(income);
@@ -86,16 +87,11 @@ public class FinanceApp {
 
         menuView.showExpenseForm();
 
-        String date = inputHelper.input("Tanggal: ");
-        String category = inputHelper.input("Kategori: ");
-        double amount = inputHelper.inputDouble("Jumlah: ");
-        String note = inputHelper.input("Catatan: ");
-
-        Expense expense = new Expense(
-                date,
-                category,
-                amount,
-                note
+        Transaction expense = factory.createExpense(
+                inputHelper.input("Tanggal: "),
+                inputHelper.input("Kategori: "),
+                inputHelper.inputDouble("Jumlah: "),
+                inputHelper.input("Catatan: ")
         );
 
         financeManager.addTransaction(expense);
