@@ -7,8 +7,8 @@ import model.Transaction;
 public class FinanceReport {
     private final FinanceCalculator financeCalculator;
 
-    public FinanceReport() {
-        this.financeCalculator = new FinanceCalculator();
+    public FinanceReport(FinanceCalculator financeCalculator) {
+        this.financeCalculator = financeCalculator;
     }
 
     public void showAllTransactions(ArrayList<Transaction> transactions) {
