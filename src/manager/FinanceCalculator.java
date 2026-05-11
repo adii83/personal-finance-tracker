@@ -16,26 +16,22 @@ public class FinanceCalculator {
     }
 
     public double calculateTotalIncome(ArrayList<Transaction> transactions) {
-        double totalIncome = 0;
-
-        for (Transaction transaction : transactions) {
-            if ("INCOME".equals(transaction.getType())) {
-                totalIncome += transaction.getAmount();
-            }
-        }
-
-        return totalIncome;
+        return calculateTotalByType(transactions, "INCOME");
     }
 
     public double calculateTotalExpense(ArrayList<Transaction> transactions) {
-        double totalExpense = 0;
+        return calculateTotalByType(transactions, "EXPENSE");
+    }
+
+    public double calculateTotalByType(ArrayList<Transaction> transactions, String type) {
+        double total = 0;
 
         for (Transaction transaction : transactions) {
-            if ("EXPENSE".equals(transaction.getType())) {
-                totalExpense += transaction.getAmount();
+            if (type.equals(transaction.getType())) {
+                total += transaction.getAmount();
             }
         }
 
-        return totalExpense;
+        return total;
     }
 }
