@@ -1,10 +1,10 @@
 package model;
 
-public abstract class Transaction {
-    private String date;
-    private String category;
-    private double amount;
-    private String note;
+public abstract class Transaction implements FinancialTransaction,TypedTransaction,AmountedTransaction {
+    private final String date;
+    private final String category;
+    private final double amount;
+    private final String note;
 
     public Transaction(String date, String category, double amount, String note) {
         this.date = date;
@@ -29,23 +29,14 @@ public abstract class Transaction {
         return note;
     }
 
+    @Override
     public abstract String getType();
-
+    
+    @Override
     public abstract double getSignedAmount();
 
-    public void displayInfo() {
-        System.out.println("--------------------------------");
-        System.out.println("Tanggal  : " + date);
-        System.out.println("Tipe     : " + getType());
-        System.out.println("Kategori : " + category);
-        System.out.println("Jumlah   : Rp" + amount);
-        System.out.println("Catatan  : " + note);
-    }
+        
 
-    /*
-     * TODO SOLID - SRP:
-     * Class Transaction seharusnya fokus sebagai model data transaksi.
-     * Saat ini class ini juga menangani tampilan melalui method displayInfo().
-     * Setelah SOLID, displayInfo() akan dipindahkan ke class view, misalnya TransactionView.
-     */
+
+
 }
