@@ -3,6 +3,7 @@ package manager;
 import java.util.ArrayList;
 
 import model.Transaction;
+import model.TransactionView;
 
 public class FinanceReport {
     private final FinanceCalculator financeCalculator;
@@ -20,7 +21,7 @@ public class FinanceReport {
         System.out.println("\n=== DAFTAR TRANSAKSI ===");
 
         for (Transaction transaction : transactions) {
-            transaction.displayInfo();
+            TransactionView.displayInfo(transaction);
         }
     }
 

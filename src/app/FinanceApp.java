@@ -1,26 +1,25 @@
 package app;
 
 import manager.FinanceManager;
+import model.Expense;
+import model.Income;
 import model.Transaction;
 
 public class FinanceApp {
 
-    private FinanceManager financeManager;
-    private MenuView menuView;
-    private InputHelper inputHelper;
-    private TransactionFactory factory;
+    private final FinanceManager financeManager;
+    private final MenuView menuView;
+    private final InputHelper inputHelper;
 
     public FinanceApp(
             FinanceManager financeManager,
             MenuView menuView,
-            InputHelper inputHelper,
-            TransactionFactory factory
+            InputHelper inputHelper
     ) {
 
         this.financeManager = financeManager;
         this.menuView = menuView;
         this.inputHelper = inputHelper;
-        this.factory = factory;
     }
 
     public void run() {
@@ -73,7 +72,7 @@ public class FinanceApp {
 
         menuView.showIncomeForm();
 
-        Transaction income = factory.createIncome(
+        Transaction income = new Income(
                 inputHelper.input("Tanggal: "),
                 inputHelper.input("Kategori: "),
                 inputHelper.inputDouble("Jumlah: "),
@@ -87,7 +86,7 @@ public class FinanceApp {
 
         menuView.showExpenseForm();
 
-        Transaction expense = factory.createExpense(
+        Transaction expense = new Expense(
                 inputHelper.input("Tanggal: "),
                 inputHelper.input("Kategori: "),
                 inputHelper.inputDouble("Jumlah: "),
