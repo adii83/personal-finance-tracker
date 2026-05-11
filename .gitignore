@@ -1,0 +1,20 @@
+# Compiled Java files
+*.class
+
+# Output folder from javac
+out/
+bin/
+
+# VS Code local settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
