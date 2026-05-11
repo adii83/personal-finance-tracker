@@ -1,3 +1,13 @@
+## Pembagian Branch dan Tanggung Jawab
+
+| Branch / Modul | Nama | NIM | Penerapan SOLID |
+| --- | --- | --- | --- |
+| `app` | Risky Wahyu Nurdi | 202310370311221 | SRP & DIP |
+| `model` | Risky Maulana Virdaus | 202310370311244 | SRP, LSP & ISP |
+| `manager` | Slamet Hariyadi | 202310370311221 | SRP, DIP & OCP |
+
+Pembagian oleh masing-masing anggota tim serta prinsip SOLID yang diterapkan pada setiap branch atau modul.
+
 # Personal Finance Tracker
 
 Personal Finance Tracker adalah aplikasi berbasis terminal menggunakan Java untuk membantu pengguna mencatat pemasukan, pengeluaran, melihat saldo, dan menampilkan laporan keuangan sederhana.
@@ -22,15 +32,6 @@ Project ini dikembangkan dengan pendekatan Object-Oriented Programming dan refac
 - GitHub
 - Visual Studio Code
 
-## Pembagian Branch dan Tanggung Jawab
-
-| Branch / Modul | Nama | NIM | Penerapan SOLID |
-| --- | --- | --- | --- |
-| `app` | Risky Wahyu Nurdi | 202310370311221 | SRP & DIP |
-| `model` | Risky Maulana Virdaus | 202310370311244 | SRP, LSP & ISP |
-| `manager` | Slamet Hariyadi | 202310370311221 | SRP, DIP & OCP |
-
-Pembagian oleh masing-masing anggota tim serta prinsip SOLID yang diterapkan pada setiap branch atau modul.
 
 ## Penerapan SOLID
 
