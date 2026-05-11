@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Transaction implements FinancialTransaction {
+public abstract class Transaction implements FinancialTransaction,TypedTransaction,AmountedTransaction {
     private final String date;
     private final String category;
     private final double amount;
