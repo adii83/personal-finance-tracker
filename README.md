@@ -1,5 +1,15 @@
 ## Pembagian Branch dan Tanggung Jawab
 
+### Unit Test
+
+| Branch / Modul | Nama | NIM |
+| --- | --- | --- |
+| `unit-test-risky_wahyu_nurdi` | Risky Wahyu Nurdi | 202310370311221 |
+| `unit-test-risky_maulana_virdaus` | Risky Maulana Virdaus | 202310370311244 |
+| `unit-test-slamet_hariyadi` | Slamet Hariyadi | 202310370311221 |
+
+## Tugas Sebelumnya Penerapan Konsep SOLID
+
 | Branch / Modul | Nama | NIM | Penerapan SOLID |
 | --- | --- | --- | --- |
 | `app` | Risky Wahyu Nurdi | 202310370311221 | SRP & DIP |
