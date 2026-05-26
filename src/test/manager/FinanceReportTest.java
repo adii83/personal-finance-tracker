@@ -35,9 +35,12 @@ public class FinanceReportTest {
             if (!hasil.contains("Status            : Keuangan masih aman.")) {
                 throw new AssertionError("Status laporan belum sesuai");
             }
-
             System.setOut(outputAwal);
-            System.out.println("Test laporan aman : Joss(OK)");
+            System.out.println("-> Cek laporan aman");
+            System.out.println("Hasil report:");
+            System.out.print(hasil);
+            System.out.println("Angka dan status sudah sesuai");
+            System.out.println("Test laporan aman : Joss(OK)\n");
 
         } finally {
             System.setOut(outputAwal);
@@ -67,9 +70,12 @@ public class FinanceReportTest {
             if (!hasil.contains("Status            : Pengeluaran lebih besar dari pemasukan.")) {
                 throw new AssertionError("status laporan salah");
             }
-
             System.setOut(outputAwal);
-            System.out.println("Test laporan pengeluaran besar : Joss(OK)");
+            System.out.println("->Cek laporan minus");
+            System.out.println("Hasil report:");
+            System.out.print(hasil);
+            System.out.println("Angka dan status sudah sesuai");
+            System.out.println("Test laporan minus : Joss(OK)\n");
 
         } finally {
             System.setOut(outputAwal);
