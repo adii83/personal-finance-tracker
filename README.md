@@ -1,12 +1,83 @@
-## Pembagian Branch dan Tanggung Jawab
+Nama  : Slamet Hariyadi
 
-| Branch / Modul | Nama | NIM | Penerapan SOLID |
-| --- | --- | --- | --- |
-| `app` | Risky Wahyu Nurdi | 202310370311221 | SRP & DIP |
-| `model` | Risky Maulana Virdaus | 202310370311244 | SRP, LSP & ISP |
-| `manager` | Slamet Hariyadi | 202310370311221 | SRP, DIP & OCP |
+NIM   : 202310370311221
 
-Pembagian oleh masing-masing anggota tim serta prinsip SOLID yang diterapkan pada setiap branch atau modul.
+Kelas : Desain Perangkat Lunak B
+
+
+### Jenis unit testing yang dilakukan
+
+Jenis unit testing yang saya gunakan adalah test double, yaitu:
+
+- Stub
+- Dummy
+
+Untuk stub, saya membuat class `StubFinanceCalculator`. Class ini dipakai sebagai pengganti `FinanceCalculator` asli saat proses test.
+
+Jadi pada saat test berjalan, nilai pemasukan, pengeluaran, dan saldo tidak dihitung dari transaksi asli, tetapi langsung saya tentukan dari test. Dengan begitu, hasil yang keluar dari laporan bisa lebih mudah dicek.
+
+Untuk dummy, saya menggunakan `ArrayList<Transaction>` kosong. List ini tetap dikirim ke method `showReport()`, tetapi isi datanya tidak terlalu dipakai karena hasil perhitungannya sudah diatur dari stub.
+
+### Komponen yang dilakukan unit testing
+
+Komponen yang saya lakukan unit testing adalah:
+
+- Package : `manager`
+- Class : `FinanceReport`
+- Method : `showReport(ArrayList<Transaction> transactions)`
+
+File yang saya tambahkan untuk unit test:
+
+- `FinanceReportTest.java`
+- `StubFinanceCalculator.java`
+- `TestRunner.java`
+
+### Hasil unit test
+
+<img width="1028" height="599" alt="image" src="https://github.com/user-attachments/assets/7774efc2-88f7-42a5-bb84-dae3244d04b8" />
+
+
+#### 1. Test laporan aman
+
+Pada test pertama, saya membuat kondisi keuangan masih aman.
+
+Nilai yang saya masukkan lewat stub:
+
+- Total pemasukan : `1000000`
+- Total pengeluaran : `250000`
+- Saldo akhir : `750000`
+
+Hasil yang dicek:
+
+- Output menampilkan pemasukan `Rp1000000.0`
+- Output menampilkan pengeluaran `Rp250000.0`
+- Output menampilkan saldo `Rp750000.0`
+- Output menampilkan status `Keuangan masih aman.`
+
+#### 2. Test laporan minus
+
+Pada test kedua, saya membuat kondisi pengeluaran lebih besar dari pemasukan.
+
+Nilai yang saya masukkan lewat stub:
+
+- Total pemasukan : `500000`
+- Total pengeluaran : `800000`
+- Saldo akhir : `-300000`
+
+Hasil yang dicek:
+
+- Output menampilkan pemasukan `Rp500000.0`
+- Output menampilkan pengeluaran `Rp800000.0`
+- Output menampilkan saldo `Rp-300000.0`
+- Output menampilkan status `Pengeluaran lebih besar dari pemasukan.`
+
+### Cara menjalankan unit test
+
+Compile semua file Java termasuk file test:
+
+```bash
+javac -d out src/app/*.java src/manager/*.java src/model/*.java src/test/*.java src/test/manager/*.java
+```
 
 # Personal Finance Tracker
 
