@@ -1,7 +1,11 @@
 package test.model;
 
+import java.util.ArrayList;
+
+import manager.FinanceCalculator;
 import model.Income;
 import model.Expense;
+import model.Transaction;
 
 public class TransactionTest {
 
@@ -20,6 +24,12 @@ public class TransactionTest {
         }
 
         if (runTest(() -> test.testExpense_HarusMengembalikanNilaiNegatif(), "testExpense_HarusMengembalikanNilaiNegatif")) {
+            passed++;
+        } else {
+            failed++;
+        }
+
+        if (runTest(() -> test.testStubTransactionHitungBalance(), "testStubTransactionHitungBalance")) {
             passed++;
         } else {
             failed++;
@@ -74,9 +84,40 @@ public class TransactionTest {
         assertEquals(ekspektasi, aktual, "Error: Nilai signed amount untuk Expense harus menjadi negatif!");
     }
 
-    private void assertEquals(double expected, double actual, String message) {
+    public void testStubTransactionHitungBalance() {
+        FinanceCalculator calculator = new FinanceCalculator();
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        transactions.add(new StubTransaction("INCOME", 120000));
+        transactions.add(new StubTransaction("EXPENSE", 50000));
+
+        double ekspektasi = 70000.0;
+        double aktual = calculator.calculateBalance(transactions);
+
+        assertEquals(ekspektasi, aktual, "Error: StubTransaction harus membuat perhitungan saldo yang dapat diuji.");
+    }
+
+    private static void assertEquals(double expected, double actual, String message) {
         if (Double.compare(expected, actual) != 0) {
             throw new AssertionError(message + " expected=" + expected + " actual=" + actual);
+        }
+    }
+
+    private static class StubTransaction extends Transaction {
+        private final String type;
+
+        public StubTransaction(String type, double amount) {
+            super("2026-05-27", "Stub", amount, "Stub transaction");
+            this.type = type;
+        }
+
+        @Override
+        public String getType() {
+            return type;
+        }
+
+        @Override
+        public double getSignedAmount() {
+            return "INCOME".equals(type) ? getAmount() : -getAmount();
         }
     }
 }
